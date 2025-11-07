@@ -1,75 +1,61 @@
-# 💧 CSE406 - Lab 01: Real-time Water Level Monitoring using Arduino UNO
+# 🌐 CSE406 - Internet of Things (IoT)
 
-## 📘 Objective
-To interface a water level sensor with Arduino Uno, read its analog data, convert it into a percentage, and visualize both the water level and its rate of change using the Arduino IDE Serial Plotter.
-
----
-
-## ⚙️ Hardware & Software Used
-- Arduino UNO  
-- Water Level Sensor  
-- Breadboard & Jumper Wires  
-- USB Cable  
-- Arduino IDE (for coding and visualization)
+### 🔬 Course Overview
+This repository contains all lab experiments, lecture notes, and project works for **CSE406 - Internet of Things (Spring 2025)**.  
+Course supervised by **Dr. Raihan Ul Islam**, Department of Computer Science & Engineering, **East West University**.  
+Maintained by **Saifur Rahman**.
 
 ---
 
-## 🧩 Circuit Connection
-| Sensor Pin | Arduino UNO Pin |
-|-------------|----------------|
-| S (Signal)  | A0             |
-| + (VCC)     | 5V             |
-| - (GND)     | GND            |
+## 📁 Repository Structure
+
+| Folder | Description |
+|---------|-------------|
+| [LAB](./LAB) | Contains all IoT lab experiments (Arduino, ESP8266, ESP32) |
+| [lecture](./lecture) | Lecture notes, slides, and references for the course |
+| [Project](./Project) | Final IoT project code and report |
 
 ---
 
-## 💻 Code Features
-✅ Reads analog sensor data  
-✅ Maps raw data (0–1023) to water level percentage (0–100%) using `map()`  
-✅ Prints both raw value and percentage for Serial Plotter visualization  
-✅ Displays alerts based on thresholds: LOW, MEDIUM, HIGH  
-✅ Calculates rate of change between readings  
-✅ Well-commented and beginner-friendly code  
+## 🧩 Lab Experiments
+
+| Lab No | Title | Description | Folder |
+|--------|--------|--------------|---------|
+| 01 | Real-time Water Level Monitoring using Arduino UNO | Measure and visualize water level percentage using an analog sensor | [Lab 01](./LAB/LAB_01_WaterLevelSensor) |
+| 02 | DHT11 & Water Sensor with ESP8266 | Collect temperature, humidity, and water level data over Wi-Fi | Coming Soon |
+| 03 | UART Communication between ESP32 and ESP8266 | Establish serial communication between two IoT boards | Coming Soon |
 
 ---
 
-## 🔢 Output Threshold Alerts
-| Water Level (%) | Alert Message     |
-|------------------|------------------|
-| 0–25%            | VERY LOW LEVEL   |
-| 25–75%           | LOW LEVEL        |
-| 75–95%           | MEDIUM LEVEL     |
-| 95–100%          | HIGH LEVEL       |
+## 💡 Final Project (Planned)
+**Title:** *Smart Water Quality Monitoring System*  
+**Description:** A real-time IoT-based water quality monitoring system using ESP32, pH sensor, and temperature sensor.  
+**Features:**
+- Real-time data visualization  
+- Wi-Fi-enabled data logging  
+- Threshold-based alerts  
+- Cloud integration via Blynk / Firebase  
+
+📂 Folder: [Project](./Project)
 
 ---
 
-## 📊 Example Output
-Water Level: 78.23%
-Rate of Change: 2.45%
-MEDIUM LEVEL
-
----
-
-## 🧠 Learning Outcome
-- Understand analog sensor data acquisition  
-- Learn data mapping and percentage scaling  
-- Implement conditional alerts based on thresholds  
-- Visualize dynamic data using Arduino Serial Plotter  
-- Apply simple IoT-style data monitoring logic  
+## 🧠 Learning Outcomes
+- Understand IoT architecture and communication models  
+- Integrate sensors, actuators, and microcontrollers  
+- Develop IoT-based monitoring and automation systems  
+- Use Arduino IDE and cloud platforms (Blynk, Firebase)
 
 ---
 
 ## 👨‍💻 Author
 **Saifur Rahman**  
 Department of Computer Science and Engineering  
-East West University  
-Spring 2025 | Course: CSE406 (Internet of Things)  
-Instructor: *Dr. Raihan Ul Islam*
+**East West University**  
+📅 *Spring 2025 | Course: CSE406 (Internet of Things)*  
+👨‍🏫 *Instructor: Dr. Raihan Ul Islam*  
+🔗 [GitHub Profile](https://github.com/saifur033)
 
 ---
 
-### 🗂️ GitHub Folder Structure
-CSE406-Internet-of-Things-Labs/
-└── Lab01_WaterLevelSensor/
-├── Lab01_WaterLevelSensor.ino
-└── README.md
+⭐ *If you found this repository useful, don’t forget to star it!*
