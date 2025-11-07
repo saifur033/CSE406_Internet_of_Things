@@ -3,45 +3,147 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="CSE406 Internet of Things (IoT) Labs - Arduino, ESP8266, ESP32 projects under Dr. Raihan Ul Islam at East West University." />
-  <meta name="keywords" content="IoT, Arduino, ESP8266, ESP32, East West University, CSE406, EWU, Saifur Rahman, IoT Labs, IoT Projects" />
+  <meta name="description" content="CSE406 - Internet of Things (IoT) Labs and Projects | East West University | Saifur Rahman" />
+  <meta name="keywords" content="IoT, Internet of Things, Arduino, ESP8266, ESP32, East West University, CSE406, EWU, Saifur Rahman, IoT Labs" />
   <title>CSE406 - Internet of Things (IoT) | East West University</title>
+
   <style>
-    body { font-family: 'Poppins', sans-serif; background: #fafafa; color: #222; line-height: 1.6; margin: 2rem; }
-    h1 { color: #0078D7; }
-    a { color: #0078D7; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .container { max-width: 900px; margin: auto; padding: 2rem; background: #fff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    footer { margin-top: 2rem; text-align: center; font-size: 0.9rem; color: #777; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+      color: #222;
+    }
+
+    /* Banner Section */
+    header {
+      background: linear-gradient(135deg, #0078d7, #005bb5);
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+      background-image: url('https://i.ibb.co/SR4VZV7/iot-banner.png');
+      background-size: cover;
+      background-position: center;
+      background-blend-mode: overlay;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      background: white;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #0078d7;
+      border-left: 5px solid #0078d7;
+      padding-left: 10px;
+    }
+
+    ul {
+      line-height: 1.8;
+    }
+
+    a {
+      color: #0078d7;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #f1f1f1;
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    .social {
+      margin-top: 1rem;
+    }
+
+    .social a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #0078d7;
+      font-weight: bold;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #0078d7;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #005bb5;
+    }
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>🌐 CSE406 - Internet of Things (IoT)</h1>
-    <p><strong>Instructor:</strong> Dr. Raihan Ul Islam</p>
-    <p><strong>Student:</strong> Saifur Rahman | Department of Computer Science and Engineering, East West University</p>
 
-    <h2>📚 Course Overview</h2>
-    <p>This site showcases IoT lab experiments and final project work for <b>CSE406 - Internet of Things</b>. Each experiment demonstrates Arduino, ESP8266, and ESP32-based IoT implementations.</p>
+<body>
+  <!-- Banner Section -->
+  <header>
+    <h1>🌐 CSE406 - Internet of Things (IoT)</h1>
+    <p>East West University | Department of Computer Science & Engineering</p>
+    <p>Instructor: Dr. Raihan Ul Islam | Maintained by: Saifur Rahman</p>
+    <a href="https://github.com/saifur033/CSE406_Internet_of_Things" class="btn" target="_blank">🔗 View on GitHub</a>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h2>📘 Course Overview</h2>
+    <p>This site presents the lab works, lectures, and final project for <b>CSE406 - Internet of Things (IoT)</b>, focusing on real-world IoT implementations using Arduino, ESP8266, and ESP32 microcontrollers.</p>
 
     <h2>🧩 Lab Experiments</h2>
     <ul>
       <li><b>Lab 01:</b> Real-time Water Level Monitoring using Arduino UNO</li>
-      <li><b>Lab 02:</b> DHT11 & Water Sensor with ESP8266</li>
+      <li><b>Lab 02:</b> DHT11 & Water Level Sensor with ESP8266</li>
       <li><b>Lab 03:</b> UART Communication between ESP32 and ESP8266</li>
       <li><b>Lab 04:</b> I²C Interface between Two ESP32 Boards</li>
     </ul>
 
     <h2>💡 Final Project</h2>
     <p><b>Smart Water Quality Monitoring System</b><br>
-    An IoT-based water quality system using ESP32, pH sensor, and temperature sensor with cloud visualization via Firebase/Blynk.</p>
+    A real-time IoT-based solution using ESP32, pH, and temperature sensors, with cloud visualization via Firebase/Blynk.</p>
 
-    <h2>🔗 GitHub Repository</h2>
-    <p><a href="https://github.com/saifur033/CSE406_Internet_of_Things" target="_blank">View Full Project on GitHub</a></p>
-
-    <footer>
-      <p>© 2025 Saifur Rahman | East West University | IoT Lab Repository</p>
-    </footer>
+    <h2>🎓 Lecture Materials</h2>
+    <ul>
+      <li><a href="./lecture/2025-Fall-CSE406-01-Intro.pptx">Lecture 01: Introduction to IoT</a></li>
+      <li><a href="./lecture/2025-Spring-CSE406-02-Sensors.pptx">Lecture 02: Sensors and Interfacing</a></li>
+      <li><a href="./lecture/2025-Spring-CSE406-03-IoTNetworks.pptx">Lecture 03: IoT Networks and Protocols</a></li>
+      <li><a href="./lecture/2025-Spring-CSE406-04-IoTRESTCOAPMQTT.pptx">Lecture 04: REST, CoAP & MQTT</a></li>
+    </ul>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Saifur Rahman | East West University | IoT Lab Repository</p>
+    <div class="social">
+      <a href="https://github.com/saifur033" target="_blank">GitHub</a> |
+      <a href="https://www.linkedin.com/in/saifur033/" target="_blank">LinkedIn</a> |
+      <a href="mailto:saifur3734@gmail.com">Email</a>
+    </div>
+  </footer>
 </body>
 </html>
