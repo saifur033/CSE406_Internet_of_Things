@@ -25,4 +25,4 @@ All lectures are conducted under the supervision of **Dr. Raihan Ul Islam**, Dep
 
 👨‍🏫 **Instructor:** Dr. Raihan Ul Islam  
 🏫 **Department of CSE, East West University**  
-📅 **Semester:** Spring 2025
+📅 **Semester:** Fall 2025
