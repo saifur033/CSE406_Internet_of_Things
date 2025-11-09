@@ -1,0 +1,136 @@
+// ESP32 I2C Master - throughput & error measurement (CSV logger)
+#include <Wire.h>
+
+#define I2C_DEV_ADDR 0x55      // must match the slave address
+#define SDA_PIN 21
+#define SCL_PIN 22
+
+// Test matrix: 8 settings (Freq Hz, Size B, Gap ms)
+struct TestCfg { uint32_t freq; uint8_t size; uint16_t gap_ms; };
+TestCfg cfgs[] = {
+  {100000, 10, 0}, {100000, 10, 10},
+  {100000, 50, 0}, {100000, 50, 10},
+  {400000, 10, 0}, {400000, 10, 10},
+  {400000, 50, 0}, {400000, 50, 10}
+};
+
+// Per-run controls
+const uint16_t MESSAGES_PER_CFG = 200;  // increase if you want more stable stats
+// Payload pattern
+uint8_t txbuf[64];
+
+uint32_t ok_msgs = 0;
+uint32_t err_msgs = 0;
+uint32_t total_bytes_sent = 0;
+uint64_t t_start_us = 0;
+
+void printCsvHeader() {
+  Serial.println("freq_hz,size_b,gap_ms,msg_index,send_bytes,ack_byte,expected_checksum,err,us_since_start");
+}
+
+uint8_t makePayload(uint8_t *buf, uint8_t size, uint32_t msg_idx) {
+  // Fill with a deterministic pattern: ASCII 'A'+k and a counter
+  // Also return XOR checksum for comparison
+  uint8_t sum = 0;
+  for (uint8_t k = 0; k < size; k++) {
+    uint8_t v = (uint8_t)('A' + (k % 26)) ^ (uint8_t)(msg_idx & 0xFF);
+    buf[k] = v;
+    sum ^= v;
+  }
+  return sum;
+}
+
+void runOneCfg(const TestCfg &c) {
+  // Re-init bus at desired frequency
+  Wire.end();
+  Wire.begin(SDA_PIN, SCL_PIN, (int)c.freq);
+
+  ok_msgs = 0;
+  err_msgs = 0;
+  total_bytes_sent = 0;
+  t_start_us = micros();
+
+  for (uint16_t m = 0; m < MESSAGES_PER_CFG; m++) {
+    // Prepare payload and expected checksum
+    uint8_t expected = makePayload(txbuf, c.size, m);
+
+    // Master write
+    Wire.beginTransmission(I2C_DEV_ADDR);
+    // Write payload bytes
+    Wire.write(txbuf, c.size);
+    uint8_t err = Wire.endTransmission(true); // STOP
+
+    // If bus-level error, count and continue
+    if (err) {
+      err_msgs++;
+      // Log with ack_byte = 0xFF to indicate bus error
+      uint64_t us = micros() - t_start_us;
+      Serial.printf("%lu,%u,%u,%u,%u,%u,%u,%u,%llu\n",
+        c.freq, c.size, c.gap_ms, m, (unsigned)c.size,
+        255u, (unsigned)expected, 1u, us);
+      // Apply gap even on error to keep pacing consistent
+      if (c.gap_ms) delay(c.gap_ms);
+      continue;
+    }
+
+    // Request 1 byte ACK (slave checksum)
+    uint8_t n = Wire.requestFrom(I2C_DEV_ADDR, (uint8_t)1, (uint8_t)true);
+    uint8_t ack = 0xFF;
+    if (n == 1 && Wire.available()) {
+      ack = Wire.read();
+    } else {
+      // No ACK received counts as error
+      err_msgs++;
+      uint64_t us = micros() - t_start_us;
+      Serial.printf("%lu,%u,%u,%u,%u,%u,%u,%u,%llu\n",
+        c.freq, c.size, c.gap_ms, m, (unsigned)c.size,
+        (unsigned)ack, (unsigned)expected, 1u, us);
+      if (c.gap_ms) delay(c.gap_ms);
+      continue;
+    }
+
+    // Compare checksum to detect content mismatch
+    bool mismatch = (ack != expected);
+    if (mismatch) err_msgs++; else ok_msgs++;
+    total_bytes_sent += c.size;
+
+    // Log row
+    uint64_t us = micros() - t_start_us;
+    Serial.printf("%lu,%u,%u,%u,%u,%u,%u,%u,%llu\n",
+      c.freq, c.size, c.gap_ms, m, (unsigned)c.size,
+      (unsigned)ack, (unsigned)expected, (unsigned)mismatch, us);
+
+    // Optional pacing gap
+    if (c.gap_ms) delay(c.gap_ms);
+  }
+
+  // Summary line for this configuration
+  float duration_s = (micros() - t_start_us) / 1e6f;
+  float throughput_Bps = (duration_s > 0) ? (total_bytes_sent / duration_s) : 0.0f;
+  float msg_per_s = (duration_s > 0) ? (MESSAGES_PER_CFG / duration_s) : 0.0f;
+  float err_pct = (MESSAGES_PER_CFG > 0) ? (100.0f * err_msgs / MESSAGES_PER_CFG) : 0.0f;
+
+  Serial.printf("SUMMARY,freq_hz=%lu,size_b=%u,gap_ms=%u,bytes=%lu,duration_s=%.3f,throughput_Bps=%.2f,msg_per_s=%.2f,error_pct=%.2f\n",
+    c.freq, c.size, c.gap_ms, total_bytes_sent, duration_s, throughput_Bps, msg_per_s, err_pct);
+}
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial) {}
+  delay(200);
+  Serial.println("I2C Master ready (CSV output)");
+  printCsvHeader();
+
+  // Run the full matrix once
+  for (auto &c : cfgs) {
+    runOneCfg(c);
+    // Small pause between configurations
+    delay(500);
+  }
+
+  Serial.println("DONE");
+}
+
+void loop() {
+  // Nothing: single-shot experiment
+}
