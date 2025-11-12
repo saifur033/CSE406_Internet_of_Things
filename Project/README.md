@@ -2,7 +2,7 @@
   <img src="./East_West_University_Logo.png" alt="East West University Logo" width="300"/>
 </p>
 
-<h2 align="center">East West University</h2>
+
 <h3 align="center">Department of Computer Science and Engineering</h3>
 
 ---
