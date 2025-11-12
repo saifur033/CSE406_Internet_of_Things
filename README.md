@@ -96,7 +96,7 @@ Department of Computer Science and Engineering
 
 ### 🌟 **Social Badges**
 
-[![LinkedIn - Saifur Rahman](https://img.shields.io/badge/LinkedIn-Saifur%20Rahman-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/saifur-rahman3734/)
+[![LinkedIn – Saifur Rahman](https://img.shields.io/badge/LinkedIn-Saifur%20Rahman-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/saifur-rahman3734/)
 [![GitHub - saifur033](https://img.shields.io/badge/GitHub-saifur033-black?style=for-the-badge&logo=github)](https://github.com/saifur033)
 [![Email - saifur3734@gmail.com](https://img.shields.io/badge/Email-saifur3734%40gmail.com-red?style=for-the-badge&logo=gmail)](mailto:saifur3734@gmail.com)
 
@@ -104,3 +104,4 @@ Department of Computer Science and Engineering
 
 ⭐ **If you found this repository useful, please give it a star — it helps others find it too!**  
 🌎 *This repository appears in searches for IoT, Arduino, ESP8266, and ESP32 lab projects from East West University.*
+
